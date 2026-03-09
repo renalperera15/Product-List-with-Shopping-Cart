@@ -1,9 +1,10 @@
 let cart = []
 let total = 0
 
-function addToCart(name,price){
+function addToCart(name, price){
 
-cart.push({name,price})
+cart.push({name, price})
+
 total += price
 
 displayCart()
@@ -13,12 +14,14 @@ displayCart()
 function displayCart(){
 
 let cartDiv = document.getElementById("cart")
-cartDiv.innerHTML=""
 
-cart.forEach((item,index)=>{
+cartDiv.innerHTML = ""
+
+cart.forEach((item, index)=>{
 
 let div = document.createElement("div")
 
+div.classList.add("cart-item")
 div.innerHTML = `
 ${item.name} - $${item.price}
 <button onclick="removeItem(${index})">Remove</button>
