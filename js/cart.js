@@ -6,12 +6,28 @@ function consolidateCart() {
     cart.forEach(item => {
         const existing = consolidated.find(i => i.name === item.name);
         if (existing) {
-            existing.quantity += item.quantity || 1; // sum existing quantities
+            existing.quantity += item.quantity || 1;
         } else {
             consolidated.push({ ...item, quantity: item.quantity || 1 });
         }
     });
     return consolidated;
+}
+
+// Get stock available from the product list
+function getStock(name) {
+    const productCard = Array.from(document.querySelectorAll(".card"))
+        .find(card => card.querySelector("h3").innerText === name);
+    if (productCard) {
+        return parseInt(productCard.getAttribute("data-stock")) + getCartQuantity(name);
+    }
+    return Infinity; // fallback if not found
+}
+
+// Get current cart quantity of a product
+function getCartQuantity(name) {
+    const productInCart = cart.find(item => item.name === name);
+    return productInCart ? productInCart.quantity : 0;
 }
 
 function displayCart() {
@@ -28,7 +44,7 @@ function displayCart() {
 
     const displayCartData = consolidateCart();
 
-    displayCartData.forEach((item, index) => {
+    displayCartData.forEach((item) => {
         total += item.price * item.quantity;
 
         // Main container
@@ -63,7 +79,15 @@ function displayCart() {
         quantityInput.min = 1;
         quantityInput.value = item.quantity;
         quantityInput.style.width = "50px";
-        quantityInput.onchange = (e) => updateQuantity(item.name, parseInt(e.target.value));
+        quantityInput.onchange = (e) => {
+            let newQty = parseInt(e.target.value);
+            const stockAvailable = getStock(item.name);
+            if (newQty > stockAvailable) {
+                newQty = stockAvailable;
+                alert(`Only ${stockAvailable} items available in stock!`);
+            }
+            updateQuantity(item.name, newQty);
+        };
 
         // Price
         const priceP = document.createElement("p");
@@ -94,6 +118,10 @@ function displayCart() {
 // Update quantity of a product
 function updateQuantity(name, newQty) {
     if (newQty < 1) return;
+
+    // Update only up to stock limit
+    const stockAvailable = getStock(name);
+    if (newQty > stockAvailable) newQty = stockAvailable;
 
     cart.forEach(item => {
         if (item.name === name) item.quantity = newQty;
