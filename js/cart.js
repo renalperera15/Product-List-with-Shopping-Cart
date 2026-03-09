@@ -1,59 +1,121 @@
-// Load cart from localStorage
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let total = 0;
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Display cart items
+// Helper: consolidate duplicates and sum quantities
+function consolidateCart() {
+    const consolidated = [];
+    cart.forEach(item => {
+        const existing = consolidated.find(i => i.name === item.name);
+        if (existing) {
+            existing.quantity += item.quantity || 1; // sum existing quantities
+        } else {
+            consolidated.push({ ...item, quantity: item.quantity || 1 });
+        }
+    });
+    return consolidated;
+}
+
 function displayCart() {
-    const cartDiv = document.getElementById('cart');
-    cartDiv.innerHTML = '';
-    total = 0;
+    const cartDiv = document.getElementById("cart");
+    cartDiv.innerHTML = "";
 
-    if(cart.length === 0){
-        cartDiv.innerHTML = '<p>Your cart is empty.</p>';
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+        document.getElementById("total").innerText = "0";
+        return;
     }
 
-    cart.forEach((item, index) => {
-        total += item.price * (item.quantity || 1);
-        const div = document.createElement('div');
-        div.classList.add('cart-item');
-        div.innerHTML = `
-            <div class="cart-item-left">
-                <img src="images/${item.name.toLowerCase().replace(/ /g,'')}.jpg" alt="${item.name}" class="cart-img">
-                <div>
-                    <p class="cart-name">${item.name}</p>
-                    <p class="cart-price">$${item.price}</p>
-                </div>
-            </div>
-            <div class="cart-item-right">
-                <input type="number" min="1" value="${item.quantity || 1}" onchange="updateQuantity(${index}, this.value)">
-                <button onclick="removeItem(${index})">Remove</button>
-            </div>
-        `;
-        cartDiv.appendChild(div);
+    const displayCartData = consolidateCart();
+
+    displayCartData.forEach((item, index) => {
+        total += item.price * item.quantity;
+
+        // Main container
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("cart-item");
+
+        // Left: image + name
+        const leftDiv = document.createElement("div");
+        leftDiv.classList.add("cart-item-left");
+
+        const img = document.createElement("img");
+        img.src = item.image;
+        img.alt = item.name;
+        img.classList.add("cart-img");
+
+        const nameDiv = document.createElement("div");
+        const nameP = document.createElement("p");
+        nameP.classList.add("cart-name");
+        nameP.innerText = item.name;
+
+        nameDiv.appendChild(nameP);
+        leftDiv.appendChild(img);
+        leftDiv.appendChild(nameDiv);
+
+        // Right: quantity + price + remove button
+        const rightDiv = document.createElement("div");
+        rightDiv.classList.add("cart-item-right");
+
+        // Quantity input
+        const quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.min = 1;
+        quantityInput.value = item.quantity;
+        quantityInput.style.width = "50px";
+        quantityInput.onchange = (e) => updateQuantity(item.name, parseInt(e.target.value));
+
+        // Price
+        const priceP = document.createElement("p");
+        priceP.classList.add("cart-price");
+        priceP.style.margin = "0 10px";
+        priceP.innerText = `$${(item.price * item.quantity).toFixed(2)}`;
+
+        // Remove button
+        const removeBtn = document.createElement("button");
+        removeBtn.innerText = "Remove";
+        removeBtn.classList.add("clear-btn");
+        removeBtn.onclick = () => removeItem(item.name);
+
+        rightDiv.appendChild(quantityInput);
+        rightDiv.appendChild(priceP);
+        rightDiv.appendChild(removeBtn);
+
+        // Combine
+        itemDiv.appendChild(leftDiv);
+        itemDiv.appendChild(rightDiv);
+
+        cartDiv.appendChild(itemDiv);
     });
 
-    document.getElementById('total').innerText = total.toFixed(2);
+    document.getElementById("total").innerText = total.toFixed(2);
 }
 
-// Remove item from cart
-function removeItem(index) {
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
+// Update quantity of a product
+function updateQuantity(name, newQty) {
+    if (newQty < 1) return;
+
+    cart.forEach(item => {
+        if (item.name === name) item.quantity = newQty;
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
     displayCart();
 }
 
-// Update quantity
-function updateQuantity(index, value) {
-    cart[index].quantity = parseInt(value);
-    localStorage.setItem('cart', JSON.stringify(cart));
+// Remove a product completely
+function removeItem(name) {
+    cart = cart.filter(item => item.name !== name);
+    localStorage.setItem("cart", JSON.stringify(cart));
     displayCart();
 }
 
-// Clear cart
+// Clear cart completely
 function clearCart() {
     cart = [];
-    localStorage.removeItem('cart');
+    localStorage.removeItem("cart");
     displayCart();
 }
 
+// Initialize
 displayCart();

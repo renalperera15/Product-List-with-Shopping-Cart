@@ -13,12 +13,36 @@ header {
     padding: 15px 0;
 }
 
-.header-container {
-    width: 80%;
-    margin: auto;
-    display: flex;
-    justify-content: space-between; /* left-right alignment */
-    align-items: center;
+.header-container{
+    width:80%;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+#searchInput {
+    width: 300px;
+    padding: 8px 12px 8px 35px; /* top 8px, right 12px, bottom 8px, left 35px for icon */
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-image: url('../images/search-icon.jpg'); 
+    background-size: 18px 18px; /* size of icon */
+    background-repeat: no-repeat;
+    background-position: right 10px center; 
+}
+/* Responsive search bar */
+@media(max-width:768px){
+    #searchInput {
+        width: 150px;
+    }
+}
+
+/* Responsive search bar */
+@media(max-width:768px){
+    #searchInput{
+        width:150px;
+    }
 }
 
 header h1 {
@@ -160,6 +184,11 @@ a.go-cart:hover{
     border-bottom:1px solid #e0e0e0;
 }
 
+.cart-item:hover {
+    background-color: #f0f4ff; /* Light blue background on hover */
+    transform: translateY(-3px); /* Slight lift effect */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Subtle shadow */
+}
 .cart-item-left{
     display:flex;
     align-items:center;

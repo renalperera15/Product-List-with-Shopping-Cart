@@ -10,9 +10,14 @@
 <header>
     <div class="header-container">
         <h1>Simple Store</h1>
+
+        <!-- Search Bar -->
+        <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+
         <a href="cart.html" class="cart-link">Cart (<span id="cart-count">0</span>)</a>
     </div>
 </header>
+
 
 <main>
 <div class="container">
@@ -23,8 +28,8 @@
 
 <!-- Product 1 -->
 <div class="card" data-stock="5">
-    <img src="images/product1.jpg" alt="Product 1" class="product-img">
-    <h3>Product 1</h3>
+    <img src="images/product1.jpg" alt="Wireless Earbuds" class="product-img">
+    <h3>Wireless Earbuds</h3>
     <p class="description">High-quality product for everyday use.</p>
     <p class="rating">⭐⭐⭐⭐☆</p>
     <p class="stock">In Stock: <span class="stock-count">5</span></p>
@@ -34,8 +39,8 @@
 
 <!-- Product 2 -->
 <div class="card" data-stock="3">
-    <img src="images/product2.jpg" alt="Product 2" class="product-img">
-    <h3>Product 2</h3>
+    <img src="images/product2.jpg" alt="Portable Bluetooth Speaker" class="product-img">
+    <h3>Portable Bluetooth Speaker</h3>
     <p class="description">Premium quality product with excellent durability.</p>
     <p class="rating">⭐⭐⭐⭐⭐</p>
     <p class="stock">In Stock: <span class="stock-count">3</span></p>
@@ -45,8 +50,8 @@
 
 <!-- Product 3 -->
 <div class="card" data-stock="7">
-    <img src="images/product3.jpg" alt="Product 3" class="product-img">
-    <h3>Product 3</h3>
+    <img src="images/product3.jpg" alt="Smart Fitness Tracker" class="product-img">
+    <h3>Smart Fitness Tracker</h3>
     <p class="description">Compact and reliable for daily needs.</p>
     <p class="rating">⭐⭐⭐⭐☆</p>
     <p class="stock">In Stock: <span class="stock-count">7</span></p>
@@ -56,8 +61,8 @@
 
 <!-- Product 4 -->
 <div class="card" data-stock="10">
-    <img src="images/product4.jpg" alt="Product 4" class="product-img">
-    <h3>Product 4</h3>
+    <img src="images/product4.jpg" alt="USB Flash Drive 32GB" class="product-img">
+    <h3>USB Flash Drive 32GB</h3>
     <p class="description">Affordable product for beginners.</p>
     <p class="rating">⭐⭐⭐☆☆</p>
     <p class="stock">In Stock: <span class="stock-count">10</span></p>
@@ -67,8 +72,8 @@
 
 <!-- Product 5 -->
 <div class="card" data-stock="4">
-    <img src="images/product5.jpg" alt="Product 5" class="product-img">
-    <h3>Product 5</h3>
+    <img src="images/product5.jpg" alt="Noise Cancelling Headphones" class="product-img">
+    <h3>Noise Cancelling Headphones</h3>
     <p class="description">High-end product for advanced users.</p>
     <p class="rating">⭐⭐⭐⭐⭐</p>
     <p class="stock">In Stock: <span class="stock-count">4</span></p>
@@ -78,8 +83,8 @@
 
 <!-- Product 6 -->
 <div class="card" data-stock="8">
-    <img src="images/product6.jpg" alt="Product 6" class="product-img">
-    <h3>Product 6</h3>
+    <img src="images/product6.jpg" alt="Power bank 10000mAh" class="product-img">
+    <h3>Power bank 10000mAh</h3>
     <p class="description">Lightweight and easy to carry around.</p>
     <p class="rating">⭐⭐⭐⭐☆</p>
     <p class="stock">In Stock: <span class="stock-count">8</span></p>
@@ -89,8 +94,8 @@
 
 <!-- Product 7 -->
 <div class="card" data-stock="6">
-    <img src="images/product7.jpg" alt="Product 7" class="product-img">
-    <h3>Product 7</h3>
+    <img src="images/product7.jpg" alt="Wireless Mouse" class="product-img">
+    <h3>Wireless Mouse</h3>
     <p class="description">Durable product with long-lasting performance.</p>
     <p class="rating">⭐⭐⭐⭐☆</p>
     <p class="stock">In Stock: <span class="stock-count">6</span></p>
@@ -100,8 +105,8 @@
 
 <!-- Product 8 -->
 <div class="card" data-stock="2">
-    <img src="images/product8.jpg" alt="Product 8" class="product-img">
-    <h3>Product 8</h3>
+    <img src="images/product8.jpg" alt="Mechanical Keyboard" class="product-img">
+    <h3>Mechanical Keyboard</h3>
     <p class="description">Premium choice for professional use.</p>
     <p class="rating">⭐⭐⭐⭐⭐</p>
     <p class="stock">In Stock: <span class="stock-count">2</span></p>
@@ -111,8 +116,8 @@
 
 <!-- Product 9 -->
 <div class="card" data-stock="5">
-    <img src="images/product9.jpg" alt="Product 9" class="product-img">
-    <h3>Product 9</h3>
+    <img src="images/product9.jpg" alt="HD Webcam" class="product-img">
+    <h3>HD Webcam</h3>
     <p class="description">Reliable and sturdy product.</p>
     <p class="rating">⭐⭐⭐⭐☆</p>
     <p class="stock">In Stock: <span class="stock-count">5</span></p>
@@ -122,8 +127,8 @@
 
 <!-- Product 10 -->
 <div class="card" data-stock="9">
-    <img src="images/product10.jpg" alt="Product 10" class="product-img">
-    <h3>Product 10</h3>
+    <img src="images/product10.jpg" alt="Phone Stand" class="product-img">
+    <h3>Phone Stand</h3>
     <p class="description">Simple and affordable product.</p>
     <p class="rating">⭐⭐⭐☆☆</p>
     <p class="stock">In Stock: <span class="stock-count">9</span></p>
@@ -133,8 +138,8 @@
 
 <!-- Product 11 -->
 <div class="card" data-stock="3">
-    <img src="images/product11.jpg" alt="Product 11" class="product-img">
-    <h3>Product 11</h3>
+    <img src="images/product11.jpg" alt="Smart LED bulb" class="product-img">
+    <h3>Smart LED bulb</h3>
     <p class="description">High-quality, best-selling item.</p>
     <p class="rating">⭐⭐⭐⭐⭐</p>
     <p class="stock">In Stock: <span class="stock-count">3</span></p>
@@ -144,8 +149,8 @@
 
 <!-- Product 12 -->
 <div class="card" data-stock="4">
-    <img src="images/product12.jpg" alt="Product 12" class="product-img">
-    <h3>Product 12</h3>
+    <img src="images/product12.jpg" alt="Wireless Charging Pad" class="product-img">
+    <h3>Wireless Charging Pad</h3>
     <p class="description">Top-rated product with excellent features.</p>
     <p class="rating">⭐⭐⭐⭐⭐</p>
     <p class="stock">In Stock: <span class="stock-count">4</span></p>
