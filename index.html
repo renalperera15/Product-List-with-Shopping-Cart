@@ -5,32 +5,59 @@
 <title>Simple Store</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
 <header>
-  <div class="header-container">
+<div class="header-container">
 
-    <h1>Simple Store</h1>
+<h1>Simple Store</h1>
 
-     <div class="header-right">
+<div class="header-right">
 
-      <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+<input type="text" class="search-bar" id="topSearch" placeholder="Search products..." onkeyup="searchProducts()">
 
-       <a href="cart.html" class="cart-link">
-          Cart (<span id="cart-count">0</span>)
-       </a>
+<a href="cart.html" class="cart-link">
+Cart (<span id="cart-count">0</span>)
+</a>
 
-       <a href="#" class="profile-icon">
-         <img src="images/profile.png" alt="Profile">
-       </a>
+<a href="#" class="profile-icon">
+<img src="images/profile.png" alt="Profile">
+</a>
 
-     </div>
+</div>
 
-  </div>
+</div>
 </header>
 
-
 <main>
+
+<script src="js/cart.js"></script>
+
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+<h3>Search</h3>
+<input type="text" class="search-bar" id="sideSearch" placeholder="Search products..." onkeyup="searchProducts()">
+
+<h3>Store Features</h3>
+
+<ul class="features">
+<li>🚚 Free Delivery</li>
+<li>🔒 Secure Payment</li>
+<li>💳 Easy Returns</li>
+<li>⭐ Top Rated Products</li>
+</ul>
+
+<h3>Contact Us</h3>
+
+<p>📞 +94 761 868</p>
+<p>✉ support@simplestore.com</p>
+<p>📍 Colombo, Sri Lanka</p>
+
+</aside>
 <div class="container">
 
 <h2>Products</h2>
@@ -174,5 +201,29 @@
 </main>
 
 <script src="js/script.js"></script>
+
+<!-- CART POPUP -->
+<div id="cartModal" class="cart-modal">
+
+<div class="cart-popup">
+
+<span class="close-cart" onclick="closeCart()">✖</span>
+
+<div class="container">
+<h2 id="cart-heading">Your Cart</h2>
+
+<div id="cart"></div>
+
+<div class="cart-actions">
+<p>Total: $<span id="total">0</span></p>
+<button onclick="clearCart()">Clear Cart</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </body>
 </html>
