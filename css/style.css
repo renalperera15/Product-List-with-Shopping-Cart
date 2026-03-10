@@ -9,28 +9,57 @@ body{
 /* ---------------- HEADER ---------------- */
 header{
     background:#2563eb;
-    color:white;
-    padding:15px 0;
+    padding:15px 40px;
 }
 
 .header-container{
     width:85%;
     margin:auto;
+    background-color: #2563eb;
     display:flex;
     align-items:center;
     justify-content:space-between;
-    flex-wrap:wrap;
 }
 
+/* Right side header group */
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+/* Store title */
 header h1{
     margin:0;
+    color:white;
+}
+
+/* ---------------- PROFILE ICON ---------------- */
+.profile-icon{
+    display:flex;
+    align-items:center;
+}
+
+.profile-icon img{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    object-fit:cover;
+    cursor:pointer;
+    border:2px solid white;
+    transition:0.2s;
+}
+
+.profile-icon img:hover{
+    transform:scale(1.1);
 }
 
 /* ---------------- SEARCH BAR ---------------- */
 #searchInput{
     width:280px;
-    padding:10px 40px 10px 12px;
-    border-radius:8px;
+    height:36px;
+    padding:6px 12px;
+    border-radius:6px;
     border:1px solid #ddd;
     font-size:14px;
     outline:none;
@@ -53,6 +82,8 @@ header h1{
     padding:10px 16px;
     border-radius:8px;
     transition:all 0.25s;
+    display:flex;
+    align-items:center;
 }
 
 .cart-link:hover{
@@ -147,7 +178,6 @@ button:hover{
     transform:translateY(-1px);
 }
 
-/* Center Add to Cart button */
 .card button{
     margin-top:auto;
 }
@@ -210,7 +240,6 @@ button:hover{
     color:#2563eb;
 }
 
-/* QUANTITY INPUT */
 .cart-item-right input[type=number]{
     width:55px;
     padding:6px;
@@ -226,87 +255,70 @@ button:hover{
     border-radius:8px;
     color:white;
     cursor:pointer;
-    transition:all 0.2s;
 }
 
 .clear-btn:hover{
     background:#b91c1c;
 }
 
-/* ---------------- CART ACTIONS (TOTAL + CLEAR BUTTON) ---------------- */
-.cart-actions {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #fff;
-    padding: 15px 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    z-index: 1000;
+/* ---------------- CART ACTIONS ---------------- */
+.cart-actions{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#fff;
+    padding:15px 20px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    box-shadow:0px 2px 10px rgba(0,0,0,0.1);
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.cart-actions p {
-    margin: 0;
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.cart-actions button {
-    padding: 8px 12px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.cart-actions button:hover {
-    background-color: #d32f2f;
+.cart-actions p{
+    margin:0;
+    font-weight:bold;
+    font-size:18px;
 }
 
 /* ---------------- RESPONSIVE ---------------- */
 @media(max-width:768px){
 
-    .header-container{
-        flex-direction:column;
-        gap:10px;
-    }
+.header-container{
+flex-direction:column;
+gap:10px;
+}
 
-    #searchInput{
-        width:100%;
-    }
+#searchInput{
+width:100%;
+}
 
-    .products{
-        grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    }
+.products{
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+}
 
-    #cart{
-        width:90%;
-    }
+#cart{
+width:90%;
+}
 
-    .cart-item{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:10px;
-    }
+.cart-item{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
 
-    .cart-item-right{
-        width:100%;
-        justify-content:space-between;
-    }
+.cart-item-right{
+width:100%;
+justify-content:space-between;
+}
 
-    .cart-actions{
-        bottom:0;
-        right:0;
-        width:100%;
-        justify-content:space-between;
-        padding:12px 20px;
-        border-radius:0;
-        box-shadow:0 -2px 10px rgba(0,0,0,0.1);
-    }
+.cart-actions{
+bottom:0;
+right:0;
+width:100%;
+justify-content:space-between;
+padding:12px 20px;
+border-radius:0;
+}
 }
