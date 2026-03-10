@@ -9,24 +9,29 @@
 <body>
 
 <header>
-<div class="header-container">
-<h1>Simple Store</h1>
-        <a href="index.html" class="cart-link">Back to Products</a>
-</div>
+        <div class="header-container">
+          <h1>Simple Store</h1>
+           <div class="header-right">
+            <a href="index.html" class="cart-link">Back to Products</a>
+
+              <a href="#" class="profile-icon">
+                <img src="images/profile.png" alt="Profile">
+              </a>
+
+           </div>
+        </div>
 </header>
 
 <main>
 
 <div class="container">
+    <h2 id="cart-heading">Your Cart</h2>
+    <div id="cart"></div>
 
-<h2>Your Cart</h2>
-
-<div id="cart"></div>
-
-<p>Total: $<span id="total">0</span></p>
-
-<button onclick="clearCart()">Clear Cart</button>
-
+    <div class="cart-actions">
+        <p>Total: $<span id="total">0</span></p>
+        <button onclick="clearCart()">Clear Cart</button>
+    </div>
 </div>
 
 </main>
