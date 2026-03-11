@@ -1,42 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Cart</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
 <header>
-        <div class="header-container">
-          <h1>Simple Store</h1>
-           <div class="header-right">
-            <a href="index.html" class="cart-link">Back to Products</a>
-
-              <a href="#" class="profile-icon">
+    <div class="header-container">
+        <h1>Simple Store</h1>
+        <div class="header-right">
+            <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
+            <a href="#" class="profile-icon">
                 <img src="images/profile.png" alt="Profile">
-              </a>
-
-           </div>
+            </a>
         </div>
+    </div>
 </header>
 
-<main>
-
-<div class="container">
-    <h2 id="cart-heading">Your Cart</h2>
-    <div id="cart"></div>
-
-    <div class="cart-actions">
-        <p>Total: $<span id="total">0</span></p>
+<!-- Cart Sidebar -->
+<div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button id="close-cart">&times;</button>
+    </div>
+    <div id="cart-container"></div>
+    <div class="cart-footer">
+        <p>Total: $<span id="sidebar-total">0</span></p>
         <button onclick="clearCart()">Clear Cart</button>
     </div>
 </div>
-
-</main>
-
-<script src="js/cart.js"></script>
-
-</body>
-</html>

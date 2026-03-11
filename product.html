@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Details</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <h1>Simple Store</h1>
+    <div class="header-right">
+      <a href="index.html" class="back-btn">Back to Products</a>
+      <a href="cart.html" class="cart-link">🛒 Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </div>
+</header>
+
+<div class="product-detail">
+
+  <!-- Images section -->
+  <div class="product-images">
+    <button class="arrow left" onclick="prevImage()">❮</button>
+    <img id="mainImage" class="main-image">
+    <button class="arrow right" onclick="nextImage()">❯</button>
+
+    <div class="thumbnail-container">
+      <img id="img1" class="thumb">
+      <img id="img2" class="thumb">
+      <img id="img3" class="thumb">
+    </div>
+  </div>
+
+  <!-- Product info section -->
+  <div class="product-info">
+    <h2 id="productName"></h2>
+    <p class="price" id="productPrice"></p>
+    <p class="stock">Available Stock: <span id="productStock"></span></p>
+    <div id="productDesc"></div>
+    <button onclick="addSelectedToCart()">Add to Cart</button>
+  </div>
+
+</div>
+
+
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let stockData = JSON.parse(localStorage.getItem("stockData")) || {};
+const product = JSON.parse(localStorage.getItem("selectedProduct")) || {};
+let currentImage = 0;
+const images = product.images?.map(img => img.trim()) || [];
+
+// Set product info
+document.getElementById("productName").innerText = product.name || "Product Name";
+document.getElementById("productPrice").innerText = "$" + (product.price || 0);
+document.getElementById("productStock").innerText = stockData[product.name] ?? 0;
+
+const descContainer = document.getElementById("productDesc");
+descContainer.innerHTML = "";
+if(product.sellpoints && product.sellpoints.length > 0){
+  const ul = document.createElement("ul");
+  product.sellpoints.forEach(point => {
+    const li = document.createElement("li");
+    li.innerText = point;
+    ul.appendChild(li);
+  });
+  descContainer.appendChild(ul);
+} else {
+  descContainer.innerText = product.description || "No description available";
+}
+
+// Load main image and thumbnails
+if(images.length > 0){
+  document.getElementById("mainImage").src = images[0];
+  if(images[0]) document.getElementById("img1").src = images[0];
+  if(images[1]) document.getElementById("img2").src = images[1];
+  if(images[2]) document.getElementById("img3").src = images[2];
+}
+
+// Thumbnail click
+["img1","img2","img3"].forEach((id, index) => {
+  const thumb = document.getElementById(id);
+  if(thumb){
+    thumb.onclick = () => {
+      currentImage = index;
+      document.getElementById("mainImage").src = images[index];
+    }
+  }
+});
+
+// Arrow navigation
+function nextImage() {
+  if(images.length === 0) return;
+  currentImage = (currentImage + 1) % images.length;
+  document.getElementById("mainImage").src = images[currentImage];
+}
+function prevImage() {
+  if(images.length === 0) return;
+  currentImage = (currentImage - 1 + images.length) % images.length;
+  document.getElementById("mainImage").src = images[currentImage];
+}
+
+// Add to cart
+function addSelectedToCart(){
+    if(!product.name) return;
+
+    const stock = stockData[product.name] ?? 0;
+    if(stock <= 0){
+        alert("Out of stock!");
+        return;
+    }
+
+    // Reduce stock
+    stockData[product.name] = stock - 1;
+    document.getElementById("productStock").innerText = stockData[product.name];
+    if(stockData[product.name] === 0) document.getElementById("productStock").style.color = "red";
+
+    // Add to cart
+    const existing = cart.find(i => i.name === product.name);
+    if(existing){
+        existing.quantity += 1;
+    } else {
+        cart.push({
+            name: product.name,
+            price: parseFloat(product.price),
+            image: images[0] || "",
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("stockData", JSON.stringify(stockData));
+    updateCartCount();
+}
+
+// Update cart count
+function updateCartCount(){
+    const count = cart.reduce((sum,i) => sum + i.quantity, 0);
+    document.getElementById("cart-count").innerText = count;
+}
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
